@@ -6,7 +6,7 @@ on:
       - published
   push:
     branches:
-      - developer
+      - dev
   workflow_dispatch:
 
 jobs:

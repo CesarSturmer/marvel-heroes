@@ -1,28 +1,3 @@
-// {
-//     "env": {
-//         "browser": true,
-//         "es2021": true
-//     },
-//     "extends": [
-//         "plugin:react/recommended",
-//         "airbnb"
-//     ],
-//     "parser": "@typescript-eslint/parser",
-//     "parserOptions": {
-//         "ecmaFeatures": {
-//             "jsx": true
-//         },
-//         "ecmaVersion": "latest",
-//         "sourceType": "module"
-//     },
-//     "plugins": [
-//         "react",
-//         "@typescript-eslint"
-//     ],
-//     "rules": {
-//     }
-// }
-
 {
   "env": {
     "browser": true,
@@ -48,7 +23,8 @@
     "react",
     "@typescript-eslint",
     "eslint-plugin-import-helpers",
-    "prettier"
+    "prettier",
+    "import-helpers"
   ],
   "rules": {
     "camelcase": "off",
@@ -80,10 +56,17 @@
       }
     ],
     "import-helpers/order-imports": [
-      "warn",
+      "error",
       {
         "newlinesBetween": "always",
-        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+        "groups": [
+          "/^react/",
+          "/^react-dom/",
+          ["/^axios/", "/^styled-components/"],
+          "module",
+          "/^@shared/",
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true

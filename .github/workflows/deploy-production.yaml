@@ -2,7 +2,7 @@ name: deploy-preview
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   deploy:

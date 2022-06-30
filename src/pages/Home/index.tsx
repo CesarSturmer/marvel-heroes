@@ -1,5 +1,12 @@
-import React from 'react';
+import Header from 'components/Header';
+
+import ListCharacters from './ListCharacters.ts';
 
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <Header />
+      <ListCharacters />
+    </div>
+  );
 }

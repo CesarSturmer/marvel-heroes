@@ -9,3 +9,8 @@ export type GetListCharactersResponse = {
     total: number;
   };
 };
+
+export type GetListCharactersParams = {
+  nameStartsWith: string | null;
+  limit?: string;
+};

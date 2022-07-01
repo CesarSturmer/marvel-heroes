@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Characters } from '@Types/character-type';
-import { getListCharacters } from 'services/getListCharacters';
+import Card from 'components/Card';
+import Loading from 'components/Loading';
+import { useCharacters } from 'context/character';
 
 import { Container } from './styles';
 
-export default function ListCharacters() {
-  const [data, setData] = useState<Characters[]>([]);
-  async function getData() {
-    const { data, success } = await getListCharacters({ name: 'SPIDER-MAN' });
+type ListCharactersProps = {
+  listCharacters: Characters[];
+};
 
-    if (success) setData(data);
-  }
+export default function ListCharacters({ listCharacters }: ListCharactersProps) {
+  const { isLoading, getData, filters } = useCharacters();
 
   useEffect(() => {
-    getData();
+    getData({ nameStartsWith: filters.name });
   }, []);
-
   return (
     <Container>
-      {' '}
-      {data && (
-        <ul>
-          {data.map((item: Characters) => (
-            <li>{item.name}</li>
-          ))}
-        </ul>
-      )}
-      {!data.length && <h1>CARREGANDO MANE</h1>}
+      {!isLoading &&
+        listCharacters.map((character: Characters) => (
+          <Card key={character.id} character={character} />
+        ))}
+      {isLoading && <Loading />}
     </Container>
   );
 }

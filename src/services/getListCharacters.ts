@@ -2,20 +2,21 @@
 import md5 from 'crypto-js/md5';
 
 import { api } from '../configs/api';
-import { GetListCharactersResponse } from './listCharacters-type';
+import { GetListCharactersParams, GetListCharactersResponse } from './listCharacters-type';
 
-type GetListCharactersParams = {
-  name: string;
-  limit?: string;
+type ParamsApiDefaultProps = {
+  apikey: string | undefined;
+  ts: number;
+  hash?: CryptoJS.lib.WordArray;
 };
 
 export async function getListCharacters(params: GetListCharactersParams) {
   try {
     const now = Date.now();
     const publicKey = process.env.REACT_APP_PUBLIC_KEY;
-    const privateKey = process.env.REACT_APP_PRIVATE_KEY;
+    const privateKey = process.env.REACT_APP_PRIVATE_KEY || '';
 
-    let paramsApiDefault: any = {
+    let paramsApiDefault: ParamsApiDefaultProps = {
       apikey: publicKey,
       ts: now
     };
@@ -26,8 +27,10 @@ export async function getListCharacters(params: GetListCharactersParams) {
       `/characters?ts=${paramsApiDefault.ts}&apikey=${paramsApiDefault.apikey}&hash=${paramsApiDefault.hash}`,
       {
         params: {
-          limit: 20
-          // nameStartsWith: 'p'
+          limit: 20,
+          nameStartsWith: params.nameStartsWith || null,
+          orderBy: 'name',
+          offset: 0
         }
       }
     );

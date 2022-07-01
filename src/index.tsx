@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Home from './pages/Home';
+import { ThemeProvider } from 'styled-components';
+
+import { GlobalStyles } from 'styles/global';
+import theme from 'styles/theme';
+
+const Home = React.lazy(() => import('pages/Home'));
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
-  <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <GlobalStyles />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,5 +28,5 @@ root.render(
         />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </ThemeProvider>
 );

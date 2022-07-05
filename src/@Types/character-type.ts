@@ -29,3 +29,12 @@ export type Characters = {
     url: string;
   };
 };
+
+export type CharactersFavorite = {
+  id: number;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  name: string;
+};

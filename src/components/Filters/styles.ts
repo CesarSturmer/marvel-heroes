@@ -18,10 +18,15 @@ export const ContainerSwitch = styled.div`
     min-width: auto;
   }
 `;
+type WrapperSpanAndSVGProps = {
+  aplyCursorPointer?: boolean;
+};
 
-export const WrapperSpanAndSVG = styled.div`
+export const WrapperSpanAndSVG = styled.div<WrapperSpanAndSVGProps>`
   display: flex;
   align-items: center;
+
+  cursor: ${({ aplyCursorPointer }) => aplyCursorPointer && 'pointer'};
 
   > svg {
     margin-right: 5px;

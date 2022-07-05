@@ -1,36 +1,28 @@
-import React, { useState } from 'react';
-
-import { Characters } from '@Types/character-type';
+import { Characters, CharactersFavorite } from '@Types/character-type';
 import { HeartOff } from 'assets/Icons/Heart/HeartOff';
 import { HeartOn } from 'assets/Icons/Heart/HeartOn';
+import { useCharacters } from 'context/character';
 
 import { Container, ImageCard, WrapperNameAndFavorite } from './styles';
 
-const MY_FAVORE = [1011334, 1009144];
-
 type CardProps = {
-  character: Characters;
+  character: Characters | CharactersFavorite;
+  handleTeste: (character: CharactersFavorite) => void;
 };
 
-// quando receber eu preciso validar se ele já está na lista de favoritos [idfavoritos]
+export default function Card({ character, handleTeste }: CardProps) {
+  const { myFavorites } = useCharacters();
 
-// ao clicar preciso pegar o id
-
-type Favorites = {
-  names: number[];
-};
-export default function Card({ character }: CardProps) {
-  const [myFavorites, setMyFavorites] = useState<number[]>([]);
-
-  console.log(myFavorites);
+  const isMyFavorite = myFavorites.find((characterFilters) => {
+    return character.id === characterFilters.id;
+  });
 
   return (
-    <Container onClick={() => alert('character.id')}>
+    <Container onClick={() => handleTeste(character)}>
       <ImageCard url={character.thumbnail.path} />
       <WrapperNameAndFavorite>
         <span>{character.name}</span>
-
-        {myFavorites.includes(character.id) ? <HeartOn /> : <HeartOff />}
+        {isMyFavorite?.id === character.id ? <HeartOn /> : <HeartOff />}
       </WrapperNameAndFavorite>
     </Container>
   );

@@ -29,7 +29,7 @@ export async function getListCharacters(params: GetListCharactersParams) {
         params: {
           limit: 20,
           nameStartsWith: params.nameStartsWith || null,
-          orderBy: 'name',
+          orderBy: params.orderBy || null,
           offset: 0
         }
       }

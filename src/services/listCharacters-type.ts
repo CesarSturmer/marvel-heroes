@@ -11,6 +11,7 @@ export type GetListCharactersResponse = {
 };
 
 export type GetListCharactersParams = {
-  nameStartsWith: string | null;
+  nameStartsWith?: string | null;
   limit?: string;
+  orderBy?: string;
 };

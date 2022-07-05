@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-
-import { Characters } from '@Types/character-type';
+import { Characters, CharactersFavorite } from '@Types/character-type';
 import Card from 'components/Card';
 import Loading from 'components/Loading';
 import { useCharacters } from 'context/character';
@@ -8,20 +6,21 @@ import { useCharacters } from 'context/character';
 import { Container } from './styles';
 
 type ListCharactersProps = {
-  listCharacters: Characters[];
+  listCharacters: Characters[] | CharactersFavorite[];
 };
 
 export default function ListCharacters({ listCharacters }: ListCharactersProps) {
-  const { isLoading, getData, filters } = useCharacters();
+  const { isLoading, setMyFavorites } = useCharacters();
 
-  useEffect(() => {
-    getData({ nameStartsWith: filters.name });
-  }, []);
   return (
     <Container>
       {!isLoading &&
-        listCharacters.map((character: Characters) => (
-          <Card key={character.id} character={character} />
+        listCharacters.map((character: Characters | CharactersFavorite) => (
+          <Card
+            key={character.id}
+            character={character}
+            handleTeste={(idNumber) => setMyFavorites(idNumber)}
+          />
         ))}
       {isLoading && <Loading />}
     </Container>

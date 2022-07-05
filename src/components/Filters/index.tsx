@@ -1,10 +1,24 @@
+import { HeartOff } from 'assets/Icons/Heart/HeartOff';
 import { HeartOn } from 'assets/Icons/Heart/HeartOn';
 import { HeroeIcon } from 'assets/Icons/HeroeIcon';
 import { ToggleSwitch } from 'components/ToggleSwitch';
+import { useCharacters } from 'context/character';
 
 import { Container, ContainerSwitch, WrapperSpanAndSVG } from './styles';
 
 export default function Filters() {
+  const { setIsLoading, filters, setFilters } = useCharacters();
+
+  const handleViewFavoriteHeroes = () => {
+    setIsLoading(true);
+    setFilters((prevState) => ({
+      ...prevState,
+      isViewFavorite: !filters.isViewFavorite
+    }));
+
+    setIsLoading(false);
+  };
+
   return (
     <Container>
       <ContainerSwitch>
@@ -14,8 +28,8 @@ export default function Filters() {
         </WrapperSpanAndSVG>
         <ToggleSwitch />
 
-        <WrapperSpanAndSVG>
-          <HeartOn />
+        <WrapperSpanAndSVG aplyCursorPointer onClick={() => handleViewFavoriteHeroes()}>
+          {filters.isViewFavorite ? <HeartOn /> : <HeartOff />}
           <span>Somente Favoritos</span>
         </WrapperSpanAndSVG>
       </ContainerSwitch>

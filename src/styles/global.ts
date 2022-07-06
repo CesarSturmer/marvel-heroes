@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body { 
     overflow-y: scroll;
+    overflow-x: hidden;
     font-family: 'Roboto Condensed', sans-serif;
     background-color: ${({ theme }) => theme.comom.white};
   }
@@ -18,6 +19,7 @@ export const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
+    cursor: pointer;
   }
 
 `;

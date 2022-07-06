@@ -3,23 +3,25 @@ import md5 from 'crypto-js/md5';
 import { paramsApiDefault, privateKey, publicKey } from 'utils/paramsService';
 
 import { api } from '../configs/api';
-import { GetListCharactersParams, GetCharactersResponse } from './listCharacters-type';
 
-export async function getListCharacters(params: GetListCharactersParams) {
+export type HeroDetailParams = {
+  characterId: string;
+};
+export async function getHeroDetailComics(params: HeroDetailParams) {
   try {
     paramsApiDefault.hash = md5(paramsApiDefault.ts + privateKey + publicKey);
 
-    const data = await api.get<GetCharactersResponse>(
-      `/characters?ts=${paramsApiDefault.ts}&apikey=${paramsApiDefault.apikey}&hash=${paramsApiDefault.hash}`,
+    const data = await api.get(
+      `/characters/${params.characterId}/comics?ts=${paramsApiDefault.ts}&apikey=${paramsApiDefault.apikey}&hash=${paramsApiDefault.hash}`,
       {
         params: {
-          limit: 20,
-          nameStartsWith: params.nameStartsWith || null,
-          orderBy: params.orderBy || null,
-          offset: 0
+          orderBy: 'onsaleDate',
+          limit: 10
         }
       }
     );
+    console.log('dataResponse', data.data);
+
     const dataResponse = data.data.data.results;
     return {
       success: true,

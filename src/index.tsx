@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 
+import CharactersDetail from 'pages/CharactersDetail';
+import Home from 'pages/Home';
 import { GlobalStyles } from 'styles/global';
 import theme from 'styles/theme';
-
-const Home = React.lazy(() => import('pages/Home'));
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -17,6 +17,10 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/hero">
+          <Route path=":characterId" element={<CharactersDetail />} />
+        </Route>
+
         <Route
           path="*"
           element={

@@ -4,9 +4,13 @@ export const Container = styled.div`
   width: 400px;
   height: 400px;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (${({ theme }) => theme.breakpoints.mobile}) {
+    top: 80%;
+  }
 
   .blob-1,
   .blob-2 {

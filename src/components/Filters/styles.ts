@@ -17,6 +17,11 @@ export const ContainerSwitch = styled.div`
   @media (${({ theme }) => theme.breakpoints.desktop}) {
     min-width: auto;
   }
+
+  @media (${({ theme }) => theme.breakpoints.mobile}) {
+    flex-direction: column;
+    justify-content: start;
+  }
 `;
 type WrapperSpanAndSVGProps = {
   aplyCursorPointer?: boolean;

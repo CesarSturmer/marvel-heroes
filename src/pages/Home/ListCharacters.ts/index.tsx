@@ -19,7 +19,7 @@ export default function ListCharacters({ listCharacters }: ListCharactersProps) 
           <Card
             key={character.id}
             character={character}
-            handleTeste={(idNumber) => setMyFavorites(idNumber)}
+            handleFavoriteHero={(idNumber) => setMyFavorites(idNumber)}
           />
         ))}
       {isLoading && <Loading />}

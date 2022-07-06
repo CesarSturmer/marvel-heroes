@@ -13,7 +13,7 @@ type ImageCardProps = {
 };
 
 export const ImageCard = styled.div<ImageCardProps>`
-  background-image: url(${({ url }) => `${url}/standard_xlarge.jpg`});
+  background-image: url(${({ url }) => `${url}`});
   background-repeat: no-repeat;
   background-size: cover;
   width: 250px;
@@ -39,6 +39,7 @@ export const WrapperNameAndFavorite = styled.div`
   justify-content: space-between;
   width: 250px;
   margin-top: 20px;
+  cursor: pointer;
 
   > span {
     color: ${({ theme }) => theme.text.primary};

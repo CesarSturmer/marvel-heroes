@@ -8,7 +8,8 @@ export default {
 
   colors: {
     primary: '#e62429',
-    secondary: '#FDECEC'
+    secondary: '#FDECEC',
+    backgroundDetailHero: '#E7F6E7'
   },
   text: {
     primary: '#5C5C5C',

@@ -15,7 +15,6 @@ export function useFavoriteHeroes() {
     }
 
     if (!favoriteHeroes) {
-      alert('ATULIZOU A PRIMEIRA VEZ');
       localStorage.setItem('heroes-marvel', JSON.stringify([]));
     }
 
@@ -42,7 +41,7 @@ export function useFavoriteHeroes() {
     }
 
     if (myFavorites.length === 5) {
-      alert('JÁ atingiu o limite máximo');
+      alert('Você só pode selecionar 5 personagens favoritos');
       return;
     }
 

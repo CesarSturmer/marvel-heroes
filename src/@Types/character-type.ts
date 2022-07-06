@@ -10,15 +10,17 @@ export type ItemsListCharacters = {
   name: string;
 };
 
+export type ThumbNail = {
+  path: string;
+  extension: string;
+};
+
 export type Characters = {
   id: number;
   name: string;
   description: string;
   modified: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
+  thumbnail: ThumbNail;
   resourceURI: string;
   comics: ItemsListCharactersObject;
   series: ItemsListCharactersObject;

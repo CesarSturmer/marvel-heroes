@@ -4,6 +4,8 @@ import { Characters, CharactersFavorite } from '@Types/character-type';
 import Filters from 'components/Filters';
 import Header from 'components/Header';
 import InputSearch from 'components/InputSearch';
+import Loading from 'components/Loading';
+import Pagination from 'components/Pagination';
 import { CharactersContext, FiltersContext } from 'context/character';
 import { useFavoriteHeroes } from 'hooks/useFavoriteHeroes';
 import { getListCharacters } from 'services/getListCharacters';
@@ -63,7 +65,7 @@ export default function Home() {
   return (
     <CharactersContext.Provider value={valueContext}>
       <Container>
-        <Header />
+        <Header isDetailHero={false} />
         <Title>{`explore o universo`.toUpperCase()}</Title>
         <SubTitle>
           Mergulhe no domínio deslumbrante de todos os personages clássicos que você ama - aqueles
@@ -88,6 +90,15 @@ export default function Home() {
           <Filters />
         </ContainerFilters>
         <ListCharacters listCharacters={filters.isViewFavorite ? myFavorites : listCharacters} />
+
+        <Pagination
+          currentPage={1}
+          totalCount={200}
+          pageSize={20}
+          onPageChange={(page) => {
+            console.log(page);
+          }}
+        />
       </Container>
     </CharactersContext.Provider>
   );

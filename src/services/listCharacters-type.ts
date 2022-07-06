@@ -35,4 +35,5 @@ export type GetListCharactersParams = {
   nameStartsWith?: string | null;
   limit?: string;
   orderBy?: string;
+  offset?: number;
 };

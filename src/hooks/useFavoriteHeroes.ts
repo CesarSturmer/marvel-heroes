@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { CharactersFavorite } from '@Types/character-type';
+import { Characters, CharactersFavorite } from '@Types/character-type';
 
 export function useFavoriteHeroes() {
-  const [myFavorites, setMyFavorites] = useState<CharactersFavorite[]>([]);
+  const [myFavorites, setMyFavorites] = useState<CharactersFavorite[] | Characters[]>([]);
 
   useEffect(() => {
     const controller = new AbortController();

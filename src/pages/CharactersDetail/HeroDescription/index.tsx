@@ -1,8 +1,13 @@
+import { useContext } from 'react';
+
 import { Characters } from '@Types/character-type';
 import { Comic } from 'assets/Icons/Comic';
+import { HeartOff } from 'assets/Icons/Heart/HeartOff';
 import { HeartOn } from 'assets/Icons/Heart/HeartOn';
 import { Movies } from 'assets/Icons/Movies';
 import Rating from 'components/Rating';
+import { CharactersContext } from 'context/CharacterContext';
+import { validateIsMyFavorite } from 'utils/validateIsMyFavorite';
 
 import {
   DescriptionContainer,
@@ -22,6 +27,10 @@ type HeroDescriptionProps = {
 };
 
 export default function HeroDescription({ heroData }: HeroDescriptionProps) {
+  const { myFavorites, setMyFavorites } = useContext(CharactersContext);
+
+  const isMyFavorite = validateIsMyFavorite(myFavorites, heroData);
+
   return (
     <DescriptionContainer>
       <DescriptionContent>
@@ -31,7 +40,9 @@ export default function HeroDescription({ heroData }: HeroDescriptionProps) {
           </div>
 
           <div>
-            <HeartOn />{' '}
+            <button onClick={() => setMyFavorites(heroData)} type="button">
+              {isMyFavorite?.id === heroData.id ? <HeartOn /> : <HeartOff />}
+            </button>
           </div>
         </WrapperDescription>
 

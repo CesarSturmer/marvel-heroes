@@ -1,7 +1,9 @@
+import { useContext } from 'react';
+
 import { Characters, CharactersFavorite } from '@Types/character-type';
 import Card from 'components/Card';
 import Loading from 'components/Loading';
-import { useCharacters } from 'context/character';
+import { CharactersContext } from 'context/CharacterContext';
 
 import { Container } from './styles';
 
@@ -10,7 +12,7 @@ type ListCharactersProps = {
 };
 
 export default function ListCharacters({ listCharacters }: ListCharactersProps) {
-  const { isLoading, setMyFavorites } = useCharacters();
+  const { isLoading, setMyFavorites } = useContext(CharactersContext);
 
   return (
     <Container>
@@ -19,7 +21,7 @@ export default function ListCharacters({ listCharacters }: ListCharactersProps) 
           <Card
             key={character.id}
             character={character}
-            handleFavoriteHero={(idNumber) => setMyFavorites(idNumber)}
+            handleFavoriteHero={(character) => setMyFavorites(character)}
           />
         ))}
       {isLoading && <Loading />}

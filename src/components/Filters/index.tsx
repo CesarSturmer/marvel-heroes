@@ -1,13 +1,15 @@
+import { useContext } from 'react';
+
 import { HeartOff } from 'assets/Icons/Heart/HeartOff';
 import { HeartOn } from 'assets/Icons/Heart/HeartOn';
 import { HeroeIcon } from 'assets/Icons/HeroeIcon';
 import { ToggleSwitch } from 'components/ToggleSwitch';
-import { useCharacters } from 'context/character';
+import { CharactersContext } from 'context/CharacterContext';
 
 import { Container, ContainerSwitch, WrapperSpanAndSVG } from './styles';
 
 export default function Filters() {
-  const { setIsLoading, filters, setFilters } = useCharacters();
+  const { setIsLoading, filters, setFilters } = useContext(CharactersContext);
 
   const handleViewFavoriteHeroes = () => {
     setIsLoading(true);

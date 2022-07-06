@@ -26,6 +26,11 @@ export const WraperHeader = styled.div`
   @media (${({ theme }) => theme.breakpoints.desktop}) {
     padding: 0 50px;
   }
+
+  @media (${({ theme }) => theme.breakpoints.tablet}) {
+    padding: 0;
+    flex-direction: column;
+  }
 `;
 
 type WrapperSectionAndIMGProps = {
@@ -72,5 +77,9 @@ export const IMGContainer = styled.div`
       max-height: 50vh;
       object-fit: cover;
     }
+  }
+
+  @media (${({ theme }) => theme.breakpoints.desktop}) {
+    padding: 20% 0% 0% 4%;
   }
 `;

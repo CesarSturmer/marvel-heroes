@@ -1,9 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Characters, CharactersFavorite } from '@Types/character-type';
 import { HeartOff } from 'assets/Icons/Heart/HeartOff';
 import { HeartOn } from 'assets/Icons/Heart/HeartOn';
-import { useCharacters } from 'context/character';
+import { CharactersContext } from 'context/CharacterContext';
 import { validateIsMyFavorite } from 'utils/validateIsMyFavorite';
 
 import { Container, ImageCard, WrapperNameAndFavorite } from './styles';
@@ -14,7 +15,7 @@ type CardProps = {
 };
 
 export default function Card({ character, handleFavoriteHero }: CardProps) {
-  const { myFavorites } = useCharacters();
+  const { myFavorites } = useContext(CharactersContext);
 
   const isMyFavorite = validateIsMyFavorite(myFavorites, character);
 

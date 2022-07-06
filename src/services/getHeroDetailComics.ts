@@ -5,7 +5,7 @@ import { paramsApiDefault, privateKey, publicKey } from 'utils/paramsService';
 import { api } from '../configs/api';
 
 export type HeroDetailParams = {
-  characterId: string;
+  characterId: number;
 };
 export async function getHeroDetailComics(params: HeroDetailParams) {
   try {
@@ -20,7 +20,6 @@ export async function getHeroDetailComics(params: HeroDetailParams) {
         }
       }
     );
-    console.log('dataResponse', data.data);
 
     const dataResponse = data.data.data.results;
     return {

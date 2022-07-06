@@ -20,9 +20,3 @@ export default {
     white: '#FFFF'
   }
 };
-
-// até 480 mobile pequeno
-// até 820 mobile grande
-// ate 1200 tablet
-// maior que 1200 desktop
-// máximo para tablet é de 820 => 1200 ( @media)

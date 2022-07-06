@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Characters } from '@Types/character-type';
@@ -6,8 +6,12 @@ import { HeroComics } from '@Types/comics-type';
 import Header from 'components/Header';
 import InputSearch from 'components/InputSearch';
 import Loading from 'components/Loading';
+import { CharactersContext } from 'context/CharacterContext';
+import { useDebounce } from 'hooks/useDebounce';
 import { getHeroDetail, HeroDetailParams } from 'services/getHeroDetail';
 import { getHeroDetailComics } from 'services/getHeroDetailComics';
+import { getListCharacters } from 'services/getListCharacters';
+import { GetListCharactersParams } from 'services/listCharacters-type';
 
 import HeroDescription from './HeroDescription';
 import HeroImage from './HeroImage';
@@ -21,25 +25,11 @@ export default function CharactersDetail() {
 
   const { characterId } = useParams<HeroDetailParams>();
 
-  const getData = async () => {
+  const getDataHeroComics = async (id: number) => {
     setIsLoading(true);
     if (characterId) {
-      const { data, success } = await getHeroDetail({ characterId });
+      const { data, success } = await getHeroDetailComics({ characterId: id });
       if (success) {
-        setHeroData(data);
-      }
-    }
-
-    setIsLoading(false);
-  };
-
-  const getDataHeroComics = async () => {
-    setIsLoading(true);
-    if (characterId) {
-      const { data, success } = await getHeroDetailComics({ characterId });
-      if (success) {
-        console.log('DATA USEEEFFE', data);
-
         setHeroDataComics(data);
       }
     }
@@ -47,15 +37,50 @@ export default function CharactersDetail() {
     setIsLoading(false);
   };
 
+  const getDataHero = async () => {
+    setIsLoading(true);
+    if (characterId) {
+      const { data, success } = await getHeroDetail({ characterId });
+      if (success) {
+        setHeroData(data);
+        getDataHeroComics(data.id);
+      }
+    }
+
+    setIsLoading(false);
+  };
+
+  const getDataCharacterSearch = async (value: string) => {
+    setIsLoading(true);
+    const { data, success } = await getListCharacters({
+      nameStartsWith: value,
+      orderBy: 'name',
+      offset: 0,
+      limit: '1'
+    });
+
+    if (success) {
+      const heroSearch = data?.data?.results[0];
+      setHeroData(heroSearch);
+      getDataHeroComics(heroSearch.id);
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    getData();
-    getDataHeroComics();
+    getDataHero();
   }, []);
+
+  const debounceSearch = useDebounce(getDataCharacterSearch, 400);
   return (
     <Container>
       <WraperHeader>
         <Header isDetailHero />
-        <InputSearch placeholder="Procure por heróis" onChange={(value) => console.log(value)} />
+        <InputSearch
+          placeholder="Procure por heróis"
+          onChange={(value) => debounceSearch(value.target.value)}
+        />
       </WraperHeader>
 
       {isLoading ? (

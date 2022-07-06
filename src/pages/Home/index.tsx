@@ -1,105 +1,89 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext } from 'react';
 
-import { Characters, CharactersFavorite } from '@Types/character-type';
 import Filters from 'components/Filters';
 import Header from 'components/Header';
 import InputSearch from 'components/InputSearch';
-import Loading from 'components/Loading';
 import Pagination from 'components/Pagination';
-import { CharactersContext, FiltersContext } from 'context/character';
+import { CharactersContext } from 'context/CharacterContext';
+import { useDebounce } from 'hooks/useDebounce';
 import { useFavoriteHeroes } from 'hooks/useFavoriteHeroes';
-import { getListCharacters } from 'services/getListCharacters';
-import { GetListCharactersParams } from 'services/listCharacters-type';
 
 import ListCharacters from './ListCharacters.ts';
 import { Container, SubTitle, Title, ContainerFilters } from './styles';
 
 export default function Home() {
-  const [listCharacters, setListCharacter] = useState<Characters[] | CharactersFavorite[]>(
-    [] as Characters[]
-  );
-  const [filters, setFilters] = useState<FiltersContext>({
-    isViewFavorite: false,
-    name: null
-  } as FiltersContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const { myFavorites } = useFavoriteHeroes();
+  const {
+    listCharacters,
+    filters,
+    setFilters,
+    getData,
+    responseData,
+    currentPage,
+    setCurrentPage
+  } = useContext(CharactersContext);
 
-  const { handleSelectFavoriteHeroes, myFavorites } = useFavoriteHeroes();
+  function onChangePage(page: number) {
+    if (page === currentPage) return;
 
-  const getData = async (params: GetListCharactersParams) => {
-    setIsLoading(true);
-    const { data, success } = await getListCharacters({
-      nameStartsWith: params.nameStartsWith,
-      orderBy: params.orderBy
-    });
+    const valuePage = page * 20 - 20;
 
-    if (success) {
-      setFilters((prevState) => ({ ...prevState, isViewFavorite: false }));
-      setListCharacter(data);
+    if (page > currentPage) {
+      setFilters((prevState) => ({ ...prevState, offset: prevState.offset + valuePage }));
+      getData({ nameStartsWith: filters.name, offset: valuePage, orderBy: filters.orderBy });
     }
 
-    setIsLoading(false);
-  };
+    if (page < currentPage) {
+      setFilters((prevState) => ({ ...prevState, offset: prevState.offset - valuePage }));
+      getData({ nameStartsWith: filters.name, offset: valuePage, orderBy: filters.orderBy });
+    }
+  }
 
-  const valueContext = useMemo(
-    () => ({
-      listCharacters,
-      filters,
-      isLoading,
-      setListCharacter,
-      setFilters,
-      setIsLoading,
-      getData,
-      myFavorites,
-      setMyFavorites: handleSelectFavoriteHeroes
-    }),
-    [filters, isLoading, listCharacters, myFavorites]
-  );
+  async function handleGetData(value: string) {
+    getData({ nameStartsWith: value, offset: 0 });
+  }
 
-  useEffect(() => {
-    const controller = new AbortController();
-    getData({ nameStartsWith: filters.name });
-    return () => controller.abort();
-  }, []);
+  const debounceSearch = useDebounce(handleGetData, 400);
 
   return (
-    <CharactersContext.Provider value={valueContext}>
-      <Container>
-        <Header isDetailHero={false} />
-        <Title>{`explore o universo`.toUpperCase()}</Title>
-        <SubTitle>
-          Mergulhe no domínio deslumbrante de todos os personages clássicos que você ama - aqueles
-          que você descobrirá em breve
-        </SubTitle>
+    <Container>
+      <Header isDetailHero={false} />
+      <Title>{`explore o universo`.toUpperCase()}</Title>
+      <SubTitle>
+        Mergulhe no domínio deslumbrante de todos os personages clássicos que você ama - aqueles que
+        você descobrirá em breve
+      </SubTitle>
 
-        <InputSearch
-          placeholder="Procure por heróis"
-          onChange={(value) => {
-            setFilters({
-              ...filters,
-              name: value.target.value,
-              isViewFavorite: !filters.isViewFavorite
-            });
+      <InputSearch
+        placeholder="Procure por heróis"
+        onChange={(value) => {
+          setFilters({
+            ...filters,
+            name: value.target.value,
+            isViewFavorite: !filters.isViewFavorite
+          });
+          setCurrentPage(1);
+          debounceSearch(value.target.value);
+        }}
+      />
 
-            getData({ nameStartsWith: value.target.value });
-          }}
-        />
+      <ContainerFilters>
+        <span>Encontrado {responseData.data?.count} heróis</span>
+        <Filters />
+      </ContainerFilters>
+      <ListCharacters listCharacters={filters.isViewFavorite ? myFavorites : listCharacters} />
 
-        <ContainerFilters>
-          <span>Encontrado 20 heróis</span>
-          <Filters />
-        </ContainerFilters>
-        <ListCharacters listCharacters={filters.isViewFavorite ? myFavorites : listCharacters} />
-
+      {!filters.isViewFavorite && (
         <Pagination
-          currentPage={1}
-          totalCount={200}
+          currentPage={currentPage}
+          totalCount={responseData.data?.total}
           pageSize={20}
           onPageChange={(page) => {
-            console.log(page);
+            setCurrentPage(page);
+            onChangePage(page);
           }}
         />
-      </Container>
-    </CharactersContext.Provider>
+      )}
+    </Container>
   );
 }

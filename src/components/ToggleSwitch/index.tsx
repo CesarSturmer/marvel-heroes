@@ -1,22 +1,25 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { ToggleOff } from 'assets/Icons/Toggle/ToggleOff';
 import { ToggleOn } from 'assets/Icons/Toggle/ToggleOn';
-import { useCharacters } from 'context/character';
+import { CharactersContext } from 'context/CharacterContext';
 
 import { ToggleContainer } from './styles';
 
 export function ToggleSwitch() {
   const [active, setActive] = useState(true);
 
-  const { getData, filters } = useCharacters();
+  const { getData, filters, setFilters, setCurrentPage } = useContext(CharactersContext);
 
   const toggle = () => {
+    setCurrentPage(1);
     if (!active) {
+      setFilters((prevState) => ({ ...prevState, orderBy: 'name' }));
       getData({ nameStartsWith: filters.name, orderBy: 'name' });
     }
 
     if (active) {
+      setFilters((prevState) => ({ ...prevState, orderBy: '-name' }));
       getData({ nameStartsWith: filters.name, orderBy: '-name' });
     }
   };

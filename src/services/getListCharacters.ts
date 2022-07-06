@@ -13,14 +13,14 @@ export async function getListCharacters(params: GetListCharactersParams) {
       `/characters?ts=${paramsApiDefault.ts}&apikey=${paramsApiDefault.apikey}&hash=${paramsApiDefault.hash}`,
       {
         params: {
-          limit: 20,
+          limit: params.limit || 20,
           nameStartsWith: params.nameStartsWith || null,
           orderBy: params.orderBy || null,
-          offset: 0
+          offset: params.offset || 0
         }
       }
     );
-    const dataResponse = data.data.data.results;
+    const dataResponse = data.data;
     return {
       success: true,
       data: dataResponse
@@ -28,7 +28,7 @@ export async function getListCharacters(params: GetListCharactersParams) {
   } catch (error) {
     return {
       success: false,
-      data: []
+      data: {} as GetCharactersResponse
     };
   }
 }

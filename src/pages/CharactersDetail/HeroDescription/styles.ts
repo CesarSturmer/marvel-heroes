@@ -42,6 +42,11 @@ export const WrapperDescription = styled.div`
   align-items: center;
   white-space: nowrap;
   width: 100%;
+
+  div > button {
+    border: none;
+    cursor: pointer;
+  }
 `;
 
 export const IMGContainer = styled.div`

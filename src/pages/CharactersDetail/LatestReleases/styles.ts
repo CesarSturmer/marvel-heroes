@@ -6,6 +6,10 @@ export const Container = styled.div`
   z-index: 1;
   display: flex;
   flex-direction: column;
+
+  @media (${({ theme }) => theme.breakpoints.desktop}) {
+    width: 100%;
+  }
 `;
 
 export const ComicTitle = styled.span`

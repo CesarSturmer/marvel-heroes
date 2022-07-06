@@ -1,3 +1,17 @@
+# Desafio Luizalabs
+
+### Desafio Frontend de uma página, baseada nesse layout.
+
+Pode ver informação dos requisitos no arquivo pdf do repositório.
+
+# Instruções de como rodar o projeto:
+
+### 1 - Acessar https://developer.marvel.com/ e criar uma conta gratuita.
+
+### 2 - Gerar chaves públicas e privadas.
+
+### 3 - Seguir os passos abaixo, e depois que estiver com projeto clonado, criar um arquivo .env e substituir pelas chaves que está no .env.example
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

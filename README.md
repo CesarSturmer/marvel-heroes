@@ -27,7 +27,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## 🔥 Preview
 
 [![Deploy with Vercel](https://vercel.com/button)]([https://marvel-heroes-sage.vercel.app/](https://marvel-heroes-sage.vercel.app/))
-
+https://marvel-heroes-sage.vercel.app/
 
 -   ### Pré-requisitos
     

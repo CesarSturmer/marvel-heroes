@@ -28,7 +28,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [![Deploy with Vercel](https://vercel.com/button)]([https://marvel-heroes-sage.vercel.app/](https://marvel-heroes-sage.vercel.app/))
 
-https://marvel-heroes-newversion.vercel.app/
+
 -   ### Pré-requisitos
     
     -   Necessário realizar a instalação do Node.js (recomendado uso da versão 16.5.0)

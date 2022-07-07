@@ -4,6 +4,12 @@
 
 Pode ver informação dos requisitos no arquivo pdf do repositório.
 
+
+# Visite o site
+([https://marvel-heroes-newversion.vercel.app/](https://marvel-heroes-newversion.vercel.app/))
+
+
+
 # Instruções de como rodar o projeto:
 
 ### 1 - Acessar https://developer.marvel.com/ e criar uma conta gratuita.
@@ -20,6 +26,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [![Deploy with Vercel](https://vercel.com/button)]([marvel-heroes-eight.vercel.app](https://marvel-heroes-eight.vercel.app/))
 
+https://marvel-heroes-newversion.vercel.app/
 -   ### Pré-requisitos
     
     -   Necessário realizar a instalação do Node.js (recomendado uso da versão 16.5.0)

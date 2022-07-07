@@ -6,7 +6,7 @@ Pode ver informação dos requisitos no arquivo pdf do repositório.
 
 
 # Visite o site
-([https://marvel-heroes-newversion.vercel.app/](https://marvel-heroes-newversion.vercel.app/))
+([https://marvel-heroes-sage.vercel.app/](https://marvel-heroes-sage.vercel.app/))
 
 
 
@@ -24,7 +24,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## 🔥 Preview
 
-[![Deploy with Vercel](https://vercel.com/button)]([marvel-heroes-eight.vercel.app](https://marvel-heroes-eight.vercel.app/))
+[![Deploy with Vercel](https://vercel.com/button)]([https://marvel-heroes-sage.vercel.app/](https://marvel-heroes-sage.vercel.app/))
 
 https://marvel-heroes-newversion.vercel.app/
 -   ### Pré-requisitos

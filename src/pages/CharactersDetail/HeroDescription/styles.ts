@@ -69,6 +69,10 @@ export const IMGContainer = styled.div`
       object-fit: cover;
     }
   }
+
+  @media (${({ theme }) => theme.breakpoints.tablet}) {
+    width: 100%;
+  }
 `;
 
 export const HeroTitle = styled.span`

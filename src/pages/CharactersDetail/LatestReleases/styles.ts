@@ -23,6 +23,12 @@ export const WrapperReleases = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   margin: 30px 0 100px 0;
+
+  @media (${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const CardRelease = styled.div`
@@ -32,11 +38,20 @@ export const CardRelease = styled.div`
   > img {
     max-width: calc(100% - 20px);
     margin-bottom: 20px;
+
+    @media (${({ theme }) => theme.breakpoints.tablet}) {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   > span {
     font-size: 22px;
     font-weight: 500;
     margin-bottom: 30px;
+  }
+
+  @media (${({ theme }) => theme.breakpoints.tablet}) {
+    width: 100%;
   }
 `;

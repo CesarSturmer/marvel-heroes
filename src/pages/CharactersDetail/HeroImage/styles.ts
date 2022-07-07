@@ -13,4 +13,8 @@ export const Container = styled.div`
     max-height: 50vh;
     object-fit: cover;
   }
+
+  @media (${({ theme }) => theme.breakpoints.tablet}) {
+    width: 100%;
+  }
 `;

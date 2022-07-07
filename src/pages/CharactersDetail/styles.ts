@@ -56,6 +56,11 @@ export const WrapperSectionAndIMG = styled.div<WrapperSectionAndIMGProps>`
 
     white-space: nowrap;
   }
+
+  @media (${({ theme }) => theme.breakpoints.tablet}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const IMGContainer = styled.div`
@@ -81,5 +86,6 @@ export const IMGContainer = styled.div`
 
   @media (${({ theme }) => theme.breakpoints.desktop}) {
     padding: 20% 0% 0% 4%;
+    width: 100%;
   }
 `;

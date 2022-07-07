@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Filters from 'components/Filters';
 import Header from 'components/Header';
@@ -6,13 +6,11 @@ import InputSearch from 'components/InputSearch';
 import Pagination from 'components/Pagination';
 import { CharactersContext } from 'context/CharacterContext';
 import { useDebounce } from 'hooks/useDebounce';
-import { useFavoriteHeroes } from 'hooks/useFavoriteHeroes';
 
 import ListCharacters from './ListCharacters.ts';
 import { Container, SubTitle, Title, ContainerFilters } from './styles';
 
 export default function Home() {
-  const { myFavorites } = useFavoriteHeroes();
   const {
     listCharacters,
     filters,
@@ -20,7 +18,8 @@ export default function Home() {
     getData,
     responseData,
     currentPage,
-    setCurrentPage
+    setCurrentPage,
+    myFavorites
   } = useContext(CharactersContext);
 
   function onChangePage(page: number) {

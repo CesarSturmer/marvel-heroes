@@ -1,7 +1,7 @@
-# Desafio Luizalabs
 
-### Desafio Frontend
-De construir uma página, consumindo a API da Marvel. Onde pudesse listar os personagens e favoritar ele, com algumas regras. E também olhar o detalhe do personagem.
+
+### Frontend Api Marvel
+De construir uma página, consumir a API da Marvel, listar os personagens e  favoritar ele. E também uma página olhar o detalhe do personagem.
 
 Explorei ao máximo a modularização e também os recursos apenas do React ( Hooks / Context ) para lidar com STATES.
 Informações dos requisitos encontrasse no arquivo pdf do repositório.
